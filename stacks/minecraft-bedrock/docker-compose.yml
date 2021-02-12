@@ -1,0 +1,30 @@
+version: "3.7"
+
+networks:
+  hostnet:
+    external: true
+    name: host
+
+services:
+  bedrock:
+    image: "itzg/minecraft-bedrock-server"
+    environment:
+      SERVER_NAME: "Name"
+      EULA: "TRUE"
+      VERSION: "1.16.201.02"
+      GAMEMODE: "survival"
+      DIFFICULTY: "easy"
+      ALLOW_CHEATS: "true"
+      DEFAULT_PERMISSION_LEVEL: "member"
+      ONLINE_MODE: "false"
+      LEVEL_NAME: "level-name"
+      LEVEL_SEED: "xxx"
+      LEVEL_TYPE: "DEFAULT"
+    networks:
+      - hostnet
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: "any"
+        max_attempts: 10
+        delay: "60s"
